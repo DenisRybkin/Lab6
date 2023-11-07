@@ -1,20 +1,21 @@
 package com.example.myapplication.fragments
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.models.News
+import com.example.myapplication.models.Product
 import java.util.UUID
 
 @Composable
-fun NewsListFragment(
-    defaultValues: List<News> = listOf(),
-    onCheckboxClick: (UUID, Boolean) -> Unit
+fun ProductListFragment(
+    defaultValues: List<Product> = listOf(),
+    onCheckboxClick: (UUID, Boolean) -> Unit,
+    onCardClick: (UUID) -> Unit,
+    cardClickable: Boolean? = null
 )
 {
     LazyColumn(
@@ -22,7 +23,13 @@ fun NewsListFragment(
         verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         items(defaultValues) {
-            item: News -> NewsFragment(item, onCheckboxClick)
+            item: Product ->
+            ProductFragment(
+                item,
+                onCheckboxClick,
+                onCardClick,
+                cardClickable
+            )
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.myapplication.fragments
 
-import android.os.Debug
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,18 +17,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myapplication.models.News
+import com.example.myapplication.models.Product
 import com.example.myapplication.utils.formatDate
 import java.util.UUID
 import android.util.Log
+import androidx.compose.material3.ExperimentalMaterial3Api
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewsFragment (
-    news: News,
-    onCheckboxClick: (UUID, Boolean) -> Unit
+fun ProductFragment (
+    product: Product,
+    onCheckboxClick: (UUID, Boolean) -> Unit,
+    onCardClick: (UUID) -> Unit,
+    cardClickable: Boolean? = null
 ) {
-    Log.e("NewsFragment ${news.id}",news.toString())
     Card(
+        onClick =  { if(cardClickable == true) onCheckboxClick(product.id, !product.checked) else onCardClick(product.id) },
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(containerColor = Color.DarkGray)
@@ -42,11 +45,12 @@ fun NewsFragment (
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column() {
-                Text(news.title, style = TextStyle(fontSize = 20.sp))
-                Text(formatDate(news.dateCreated), style = TextStyle(fontSize = 15.sp))
+                Text(product.title, style = TextStyle(fontSize = 20.sp))
+                Text("${product.price}$", style = TextStyle(fontSize = 17.sp))
+                Text(formatDate(product.dateCreated), style = TextStyle(fontSize = 15.sp))
             }
             Column() {
-                Checkbox(checked = news.checked, onCheckedChange = { onCheckboxClick(news.id, it) })
+                Checkbox(checked = product.checked, onCheckedChange = { onCheckboxClick(product.id, it) })
             }
         }
     }
