@@ -33,7 +33,7 @@ fun HeaderFragment(
             .padding(16.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.Bottom
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = text,
@@ -45,7 +45,7 @@ fun HeaderFragment(
             colors = ButtonDefaults.buttonColors(contentColor = MaterialTheme.colorScheme.errorContainer, containerColor = MaterialTheme.colorScheme.error)
         ) {
             Icon(extraIcon ?: Icons.Filled.Delete, "Floating action button.")
-            Text(text = "$extraText", style = MaterialTheme.typography.headlineSmall.copy(color = Color.Black))
+            Text(text = "$extraText", style = MaterialTheme.typography.bodyLarge.copy(color = Color.Black))
         }
     }
 }
